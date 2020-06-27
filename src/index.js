@@ -1,5 +1,5 @@
 // Format Date and Time
-formatDateTime(date) {
+function formatDateTime(date) {
     let weekDay = [
         "Sunday",
         "Monday",
@@ -25,21 +25,22 @@ formatDateTime(date) {
         "December",
     ];
 
-    let hours = now.getHours();
-    if (hours < 10) {
-    hours = `0${hours}`;
+    let hour = now.getHours();
+    if (hour < 10) {
+        hour = `0${hour}`;
     }
 
     let minutes = now.getMinutes();
     if (minutes < 10) {
-    minutes = `0${minutes}`;
+        minutes = `0${minutes}`;
     }
 
     return `${weekDay[now.getDay()]},
-    ${now.getDate()} ${month[now.getMonth()]} ${now.getFullYear()} | ${hour}:${minutes}`;
+    ${now.getDate()} ${month[now.getMonth()]} ${now.getFullYear()} ${hour}:${minutes}`;
 }
 
 let newDate = document.querySelector("#date");
 let now = new Date();
 newDate.innerHTML = formatDateTime(now);
+
 
