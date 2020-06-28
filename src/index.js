@@ -69,7 +69,19 @@ function displayWeatherDetails(response) {
     icon.setAttribute("alt", response.data.weather[0].description);
 }
 
-let apiKey = "248526705cf1e69e1604c72809dd3b61";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=metric`;
+//Search Engine - Change City input
+function search(city) {
+    let apiKey = "248526705cf1e69e1604c72809dd3b61";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayWeatherDetails);
+    axios.get(apiUrl).then(displayWeatherDetails);
+}
+
+function changeCity(event) {
+    event.preventDefault();
+    let inputCity = document.querySelector("#changeCity");
+    search(inputCity.value);
+}
+
+let form = document.querySelector("#change-city-form");
+form.addEventListener("submit", changeCity);
