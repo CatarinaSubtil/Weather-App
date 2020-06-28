@@ -85,3 +85,5 @@ function changeCity(event) {
 
 let form = document.querySelector("#change-city-form");
 form.addEventListener("submit", changeCity);
+
+search("Lisbon");
