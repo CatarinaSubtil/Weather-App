@@ -64,12 +64,12 @@ button.temperature-button:hover {
   margin-bottom: 30px;
 }
 
-.location {
+#location {
   color: #ffffff;
 }
 
-.location,
-.weather-temperature {
+#location,
+#weather-temperature {
   text-transform: uppercase;
   margin-bottom: 0;
   font-weight: 700;
@@ -85,13 +85,13 @@ button.temperature-button:hover {
   margin-bottom: 35px;
 }
 
-.weather-temperature {
+#weather-temperature {
   font-size: 60px;
   color: #ffffff;
   padding-left: 20px;
 }
 
-.weather-description {
+#weather-description {
   color: rgba(255, 255, 255, 0.5);
   padding-left: 20px;
   font-size: 15px;
@@ -124,15 +124,15 @@ li.weather-feels-like {
   text-transform: lowercase;
 }
 
-div.wind-velocity > span,
-div.humidity-percentage > span,
-div.feels-like-temp > span {
+#wind,
+#humidity,
+#feels-like {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
   font-size: 15px;
 }
 
-.icon-weather-location {
+#icon-weather-location {
   width: 95%;
   position: relative;
   top: -30px;
