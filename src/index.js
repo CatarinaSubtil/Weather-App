@@ -63,6 +63,12 @@ function displayWeatherDetails(response) {
 
     let date = document.querySelector("#date");
     date.innerHTML = formatDateTime(response.data.dt * 1000);
+
+    let icon = document.querySelector("#icon-weather");
+    icon.setAttribute("src",`src/${response.data.weather[0].icon}.svg`);
+    icon.setAttribute("alt", response.data.weather[0].description);
+
+    console.log(response.data);
 }
 
 let apiKey = "248526705cf1e69e1604c72809dd3b61";
