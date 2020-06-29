@@ -46,14 +46,18 @@ function displayWeatherDetails(response) {
     let city = document.querySelector("#location");
     city.innerHTML = response.data.name;
 
+    celsiusTemp = response.data.main.temp;
+
     let temp = document.querySelector("#weather-temperature");
-    temp.innerHTML = `${Math.round(response.data.main.temp)}°`;
+    temp.innerHTML = `${Math.round(celsiusTemp)}°`;
 
     let description = document.querySelector("#weather-description");
     description.innerHTML = response.data.weather[0].description;
 
+    celsiusFeelsLikeTemp = response.data.main.feels_like
+
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${Math.round(response.data.main.feels_like)} °`;
+    feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp)} °`;
 
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
@@ -94,12 +98,29 @@ function getGeoLocation(event) {
     navigator.geolocation.getCurrentPosition(getLocation);
 }
 
+//Unit Conversion Button °F to °C
+function getFahrenheitTemp(event) {
+    event.preventDefault();
+
+    tempButton.innerHTML = "°C";
+
+    let temp = document.querySelector("#weather-temperature");
+    temp.innerHTML = `${Math.round((celsiusTemp * 9) / 5 + 32)}°`;
+
+    let feelsLikeTemp = document.querySelector("#feels-like");
+    feelsLikeTemp.innerHTML = `${Math.round((celsiusFeelsLikeTemp * 9)/ 5 +32)} °`;
+}
+
 let apiKey = "248526705cf1e69e1604c72809dd3b61";
+let celsiusTemp = null;
+
+let form = document.querySelector("#change-city-form");
+form.addEventListener("submit", changeCity);
 
 let geoLocationButton = document.querySelector(".location-button");
 geoLocationButton.addEventListener("click", getGeoLocation);
 
-let form = document.querySelector("#change-city-form");
-form.addEventListener("submit", changeCity);
+let tempButton = document.querySelector(".temperature-button");
+tempButton.addEventListener("click", getFahrenheitTemp);
 
 search("madrid");
