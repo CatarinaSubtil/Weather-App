@@ -80,8 +80,32 @@ function displayWeatherDetails(response) {
 }
 
 //City Forecast Details
+function formatWeekDay(timestamp) {
+    let date = new Date(timestamp);
+    let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let weekDay = weekDays[date.getDay()];
+    return `${weekDay}`;
+}
+
 function displayForecastDetails(response) {
-    console.log(response.data);
+    let forecastContainer = document.querySelector("#forecast");
+    forecastContainer.innerHTML = null;
+    let forecast = null;
+
+    for (let index = 1; index < 6; index++) {
+        forecast = response.data.daily[index];
+        let weekDay = formatWeekDay(forecast.dt * 1000);
+
+        forecastContainer.innerHTML += `
+            <div class="week-day-container">
+                <h6 class="week-day">${weekDay}</h6>
+                <img class="icon" src="icons/${forecast.weather[0].icon}.svg" alt="${forecast.weather[0].description}" />
+                <div class="week-day-temperature">
+                <span class="max-temp">${Math.round(forecast.temp.max)}°</span> |
+                <span class="min-temp">${Math.round(forecast.temp.min)}°</span>
+                </div>
+            </div>`
+    }
 }
 
 //Search Engine - Change City input
