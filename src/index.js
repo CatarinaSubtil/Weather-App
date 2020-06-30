@@ -71,6 +71,17 @@ function displayWeatherDetails(response) {
     let icon = document.querySelector("#icon-weather");
     icon.setAttribute("src",`icons/${response.data.weather[0].icon}.svg`);
     icon.setAttribute("alt", response.data.weather[0].description);
+
+    //Forecast Api
+    let latitude = response.data.coord.lat;
+    let longitude = response.data.coord.lon;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayForecastDetails);
+}
+
+//City Forecast Details
+function displayForecastDetails(response) {
+    console.log(response.data);
 }
 
 //Search Engine - Change City input
