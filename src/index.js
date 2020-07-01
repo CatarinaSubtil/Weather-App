@@ -88,7 +88,7 @@ function formatWeekDay(timestamp) {
 }
 
 function displayForecastDetails(response) {
-    let forecastContainer = document.querySelector("#forecast");
+    let forecastContainer = document.querySelectorAll("#forecast");
     forecastContainer.innerHTML = null;
     let forecast = null;
     
@@ -140,9 +140,7 @@ function getGeoLocation(event) {
 }
 
 //Unit Conversion Button °F to °C
-function getFahrenheitTemp(event) {
-    event.preventDefault();
-
+function getFahrenheitTemp() {
     tempButton.innerHTML = "°C";
 
     let temp = document.querySelector("#weather-temperature");
@@ -158,6 +156,15 @@ function getFahrenheitTemp(event) {
     weekDayMinTemp.innerHTML = `${Math.round((celsiusWeekDayMinTemp * 9) / 5 + 32)}°`;
 }
 
+function convertUnits(event) {
+    event.preventDefault();
+    if(tempButton.innerHTML === "°F") {
+      getFahrenheitTemp();
+    } else {
+      displayWeatherDetails();
+    }
+  }
+
 let apiKey = "248526705cf1e69e1604c72809dd3b61";
 let celsiusTemp = null;
 let celsiusFeelsLikeTemp = null;
@@ -171,6 +178,6 @@ let geoLocationButton = document.querySelector(".location-button");
 geoLocationButton.addEventListener("click", getGeoLocation);
 
 let tempButton = document.querySelector(".temperature-button");
-tempButton.addEventListener("click", getFahrenheitTemp);
+tempButton.addEventListener("click", convertUnits);
 
 search("madrid");
