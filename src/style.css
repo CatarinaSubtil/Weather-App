@@ -173,8 +173,8 @@ hr {
   font-size: 15px;
 }
 
-.max-temp,
-.min-temp {
+#max-temp,
+#min-temp {
   color: rgba(255, 255, 255, 0.7);
   font-size: 11px;
 }

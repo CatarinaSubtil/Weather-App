@@ -54,7 +54,7 @@ function displayWeatherDetails(response) {
     let description = document.querySelector("#weather-description");
     description.innerHTML = response.data.weather[0].description;
 
-    celsiusFeelsLikeTemp = response.data.main.feels_like
+    celsiusFeelsLikeTemp = response.data.main.feels_like;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
     feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp)} °`;
@@ -91,18 +91,20 @@ function displayForecastDetails(response) {
     let forecastContainer = document.querySelector("#forecast");
     forecastContainer.innerHTML = null;
     let forecast = null;
-
+    
     for (let index = 1; index < 6; index++) {
         forecast = response.data.daily[index];
         let weekDay = formatWeekDay(forecast.dt * 1000);
+        celsiusWeekDayMaxTemp = forecast.temp.max;
+        celsiusWeekDayMinTemp = forecast.temp.min;
 
         forecastContainer.innerHTML += `
             <div class="week-day-container">
                 <h6 class="week-day">${weekDay}</h6>
                 <img class="icon" src="icons/${forecast.weather[0].icon}.svg" alt="${forecast.weather[0].description}" />
                 <div class="week-day-temperature">
-                <span class="max-temp">${Math.round(forecast.temp.max)}°</span> |
-                <span class="min-temp">${Math.round(forecast.temp.min)}°</span>
+                <span id="max-temp">${Math.round(celsiusWeekDayMaxTemp)}°</span> |
+                <span id="min-temp">${Math.round(celsiusWeekDayMinTemp)}°</span>
                 </div>
             </div>`
     }
@@ -122,10 +124,14 @@ function changeCity(event) {
 
 //Geo Location Button
 function getLocation(position) {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeatherDetails);
+
+    //Forecast Api
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayForecastDetails);
 }
 
 function getGeoLocation(event) {
@@ -143,11 +149,20 @@ function getFahrenheitTemp(event) {
     temp.innerHTML = `${Math.round((celsiusTemp * 9) / 5 + 32)}°`;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${Math.round((celsiusFeelsLikeTemp * 9)/ 5 +32)} °`;
+    feelsLikeTemp.innerHTML = `${Math.round((celsiusFeelsLikeTemp * 9) / 5 + 32)} °`;
+
+    let weekDayMaxTemp = document.querySelector("#max-temp");
+    weekDayMaxTemp.innerHTML = `${Math.round((celsiusWeekDayMaxTemp * 9) / 5 + 32)}°`;
+
+    let weekDayMinTemp = document.querySelector("#min-temp");
+    weekDayMinTemp.innerHTML = `${Math.round((celsiusWeekDayMinTemp * 9) / 5 + 32)}°`;
 }
 
 let apiKey = "248526705cf1e69e1604c72809dd3b61";
 let celsiusTemp = null;
+let celsiusFeelsLikeTemp = null;
+let celsiusWeekDayMaxTemp = null;
+let celsiusWeekDayMinTemp = null;
 
 let form = document.querySelector("#change-city-form");
 form.addEventListener("submit", changeCity);
