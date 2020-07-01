@@ -88,7 +88,7 @@ function formatWeekDay(timestamp) {
 }
 
 function displayForecastDetails(response) {
-    let forecastContainer = document.querySelectorAll("#forecast");
+    let forecastContainer = document.querySelector("#forecast");
     forecastContainer.innerHTML = null;
     let forecast = null;
     
@@ -103,8 +103,8 @@ function displayForecastDetails(response) {
                 <h6 class="week-day">${weekDay}</h6>
                 <img class="icon" src="icons/${forecast.weather[0].icon}.svg" alt="${forecast.weather[0].description}" />
                 <div class="week-day-temperature">
-                <span id="max-temp">${Math.round(celsiusWeekDayMaxTemp)}°</span> |
-                <span id="min-temp">${Math.round(celsiusWeekDayMinTemp)}°</span>
+                <span class="week-day-max-temp">${Math.round(celsiusWeekDayMaxTemp)}°</span> |
+                <span class="week-day-min-temp">${Math.round(celsiusWeekDayMinTemp)}°</span>
                 </div>
             </div>`
     }
@@ -149,11 +149,15 @@ function getFahrenheitTemp() {
     let feelsLikeTemp = document.querySelector("#feels-like");
     feelsLikeTemp.innerHTML = `${Math.round((celsiusFeelsLikeTemp * 9) / 5 + 32)} °`;
 
-    let weekDayMaxTemp = document.querySelector("#max-temp");
+    let weekDayMaxTemp = document.querySelector(".week-day-max-temp");
     weekDayMaxTemp.innerHTML = `${Math.round((celsiusWeekDayMaxTemp * 9) / 5 + 32)}°`;
 
-    let weekDayMinTemp = document.querySelector("#min-temp");
+    let weekDayMinTemp = document.querySelector(".week-day-min-temp");
     weekDayMinTemp.innerHTML = `${Math.round((celsiusWeekDayMinTemp * 9) / 5 + 32)}°`;
+}
+
+function getCelsiusTemp() {
+    alert("hello");
 }
 
 function convertUnits(event) {
@@ -161,7 +165,7 @@ function convertUnits(event) {
     if(tempButton.innerHTML === "°F") {
       getFahrenheitTemp();
     } else {
-      displayWeatherDetails();
+      getCelsiusTemp();
     }
   }
 
