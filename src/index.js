@@ -57,7 +57,7 @@ function displayWeatherDetails(response) {
     celsiusFeelsLikeTemp = response.data.main.feels_like;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp)} °`;
+    feelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp} °`;
 
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
@@ -141,31 +141,56 @@ function getGeoLocation(event) {
 
 //Unit Conversion Button °F to °C
 function getFahrenheitTemp() {
-    tempButton.innerHTML = "°C";
+    fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+    fahrenheitFeelsLikeTemp = (celsiusFeelsLikeTemp * 9) / 5 + 32;
+    fahrenheitWeekDayMaxTemp = (celsiusWeekDayMaxTemp * 9) / 5 + 32;
+    fahrenheitWeekDayMinTemp = (celsiusWeekDayMinTemp * 9) / 5 + 32;
 
     let temp = document.querySelector("#weather-temperature");
-    temp.innerHTML = `${Math.round((celsiusTemp * 9) / 5 + 32)}°`;
+    temp.innerHTML = `${Math.round(fahrenheitTemp)}°`;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${Math.round((celsiusFeelsLikeTemp * 9) / 5 + 32)} °`;
+    feelsLikeTemp.innerHTML = `${fahrenheitFeelsLikeTemp} °`;
 
-    let weekDayMaxTemp = document.querySelector(".week-day-max-temp");
-    weekDayMaxTemp.innerHTML = `${Math.round((celsiusWeekDayMaxTemp * 9) / 5 + 32)}°`;
+    let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
+    weekDayMaxTemp.forEach(function(day) {
+    day.innerHTML = `${Math.round(fahrenheitWeekDayMaxTemp)}°`;
+    });
 
-    let weekDayMinTemp = document.querySelector(".week-day-min-temp");
-    weekDayMinTemp.innerHTML = `${Math.round((celsiusWeekDayMinTemp * 9) / 5 + 32)}°`;
+    let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
+    weekDayMinTemp.forEach(function(day) {
+    day.innerHTML = `${Math.round(fahrenheitWeekDayMinTemp)}°`;
+    });
+
+    tempButton.innerHTML = "°C";
 }
 
 function getCelsiusTemp() {
-    alert("hello");
+    let temp = document.querySelector("#weather-temperature");
+    temp.innerHTML = `${Math.round(celsiusTemp)}°`;
+
+    let feelsLikeTemp = document.querySelector("#feels-like");
+    feelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp} °`;
+
+    let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
+    weekDayMaxTemp.forEach(function(day) {
+    day.innerHTML = `${Math.round(celsiusWeekDayMaxTemp)}°`;
+    });
+
+    let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
+    weekDayMinTemp.forEach(function(day) {
+    ay.innerHTML = `${Math.round(celsiusWeekDayMinTemp)}°`;
+    });
+
+    tempButton.innerHTML = "°F";
 }
 
 function convertUnits(event) {
     event.preventDefault();
-    if(tempButton.innerHTML === "°F") {
-      getFahrenheitTemp();
-    } else {
+    if(tempButton.innerHTML === "°C") {
       getCelsiusTemp();
+    } else {
+      getFahrenheitTemp();
     }
   }
 
@@ -174,6 +199,10 @@ let celsiusTemp = null;
 let celsiusFeelsLikeTemp = null;
 let celsiusWeekDayMaxTemp = null;
 let celsiusWeekDayMinTemp = null;
+let fahrenheitTemp = null;
+let fahrenheitFeelsLikeTemp = null;
+let fahrenheitWeekDayMaxTemp = null;
+let fahrenheitWeekDayMinTemp = null;
 
 let form = document.querySelector("#change-city-form");
 form.addEventListener("submit", changeCity);
@@ -184,4 +213,4 @@ geoLocationButton.addEventListener("click", getGeoLocation);
 let tempButton = document.querySelector(".temperature-button");
 tempButton.addEventListener("click", convertUnits);
 
-search("madrid");
+search("toronto");
