@@ -57,7 +57,7 @@ function displayWeatherDetails(response) {
     celsiusFeelsLikeTemp = response.data.main.feels_like;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp} °`;
+    feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp * 10) / 10} °`;
 
     let wind = document.querySelector("#wind");
     wind.innerHTML = response.data.wind.speed;
@@ -91,7 +91,7 @@ function displayForecastDetails(response) {
     let forecastContainer = document.querySelector("#forecast");
     forecastContainer.innerHTML = null;
     let forecast = null;
-    
+
     for (let index = 1; index < 6; index++) {
         forecast = response.data.daily[index];
         let weekDay = formatWeekDay(forecast.dt * 1000);
@@ -103,7 +103,7 @@ function displayForecastDetails(response) {
                 <h6 class="week-day">${weekDay}</h6>
                 <img class="icon" src="icons/${forecast.weather[0].icon}.svg" alt="${forecast.weather[0].description}" />
                 <div class="week-day-temperature">
-                <span class="week-day-max-temp">${Math.round(celsiusWeekDayMaxTemp)}°</span> |
+                <span class="week-day-max-temp">${Math.round(celsiusWeekDayMaxTemp)}°</span> | 
                 <span class="week-day-min-temp">${Math.round(celsiusWeekDayMinTemp)}°</span>
                 </div>
             </div>`
@@ -150,16 +150,16 @@ function getFahrenheitTemp() {
     temp.innerHTML = `${Math.round(fahrenheitTemp)}°`;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${fahrenheitFeelsLikeTemp} °`;
+    feelsLikeTemp.innerHTML = `${Math.round(fahrenheitFeelsLikeTemp * 10) / 10} °`;
 
     let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
-    weekDayMaxTemp.forEach(function(day) {
-    day.innerHTML = `${Math.round(fahrenheitWeekDayMaxTemp)}°`;
+    weekDayMaxTemp.forEach(function(weekDayMaxTemp) {
+    weekDayMaxTemp.innerHTML = `${Math.round(fahrenheitWeekDayMaxTemp)}°`;
     });
 
     let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
-    weekDayMinTemp.forEach(function(day) {
-    day.innerHTML = `${Math.round(fahrenheitWeekDayMinTemp)}°`;
+    weekDayMinTemp.forEach(function(weekDayMinTemp) {
+    weekDayMinTemp.innerHTML = `${Math.round(fahrenheitWeekDayMinTemp)}°`;
     });
 
     tempButton.innerHTML = "°C";
@@ -170,16 +170,16 @@ function getCelsiusTemp() {
     temp.innerHTML = `${Math.round(celsiusTemp)}°`;
 
     let feelsLikeTemp = document.querySelector("#feels-like");
-    feelsLikeTemp.innerHTML = `${celsiusFeelsLikeTemp} °`;
+    feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp * 10) / 10} °`;
 
     let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
-    weekDayMaxTemp.forEach(function(day) {
-    day.innerHTML = `${Math.round(celsiusWeekDayMaxTemp)}°`;
+    weekDayMaxTemp.forEach(function(weekDayMaxTemp) {
+    weekDayMaxTemp.innerHTML = `${Math.round(celsiusWeekDayMaxTemp)}°`;
     });
 
     let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
-    weekDayMinTemp.forEach(function(day) {
-    ay.innerHTML = `${Math.round(celsiusWeekDayMinTemp)}°`;
+    weekDayMinTemp.forEach(function(weekDayMinTemp) {
+    weekDayMinTemp.innerHTML = `${Math.round(celsiusWeekDayMinTemp)}°`;
     });
 
     tempButton.innerHTML = "°F";
