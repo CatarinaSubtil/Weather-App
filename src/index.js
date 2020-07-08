@@ -152,16 +152,6 @@ function getFahrenheitTemp() {
     let feelsLikeTemp = document.querySelector("#feels-like");
     feelsLikeTemp.innerHTML = `${Math.round(fahrenheitFeelsLikeTemp * 10) / 10} °`;
 
-    let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
-    weekDayMaxTemp.forEach(function(weekDayMaxTemp) {
-    weekDayMaxTemp.innerHTML = `${Math.round(fahrenheitWeekDayMaxTemp)}°`;
-    });
-
-    let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
-    weekDayMinTemp.forEach(function(weekDayMinTemp) {
-    weekDayMinTemp.innerHTML = `${Math.round(fahrenheitWeekDayMinTemp)}°`;
-    });
-
     tempButton.innerHTML = "°C";
 }
 
@@ -171,16 +161,6 @@ function getCelsiusTemp() {
 
     let feelsLikeTemp = document.querySelector("#feels-like");
     feelsLikeTemp.innerHTML = `${Math.round(celsiusFeelsLikeTemp * 10) / 10} °`;
-
-    let weekDayMaxTemp = document.querySelectorAll(".week-day-max-temp");
-    weekDayMaxTemp.forEach(function(weekDayMaxTemp) {
-    weekDayMaxTemp.innerHTML = `${Math.round(celsiusWeekDayMaxTemp)}°`;
-    });
-
-    let weekDayMinTemp = document.querySelectorAll(".week-day-min-temp");
-    weekDayMinTemp.forEach(function(weekDayMinTemp) {
-    weekDayMinTemp.innerHTML = `${Math.round(celsiusWeekDayMinTemp)}°`;
-    });
 
     tempButton.innerHTML = "°F";
 }
