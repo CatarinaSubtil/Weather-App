@@ -143,8 +143,6 @@ function getGeoLocation(event) {
 function getFahrenheitTemp() {
     fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
     fahrenheitFeelsLikeTemp = (celsiusFeelsLikeTemp * 9) / 5 + 32;
-    fahrenheitWeekDayMaxTemp = (celsiusWeekDayMaxTemp * 9) / 5 + 32;
-    fahrenheitWeekDayMinTemp = (celsiusWeekDayMinTemp * 9) / 5 + 32;
 
     let temp = document.querySelector("#weather-temperature");
     temp.innerHTML = `${Math.round(fahrenheitTemp)}°`;
@@ -181,8 +179,6 @@ let celsiusWeekDayMaxTemp = null;
 let celsiusWeekDayMinTemp = null;
 let fahrenheitTemp = null;
 let fahrenheitFeelsLikeTemp = null;
-let fahrenheitWeekDayMaxTemp = null;
-let fahrenheitWeekDayMinTemp = null;
 
 let form = document.querySelector("#change-city-form");
 form.addEventListener("submit", changeCity);
